@@ -27,3 +27,20 @@ steps:
     backendAzureRmStorageAccountName: 's2storageaccountdevops42'
     backendAzureRmContainerName: 's2containerdevops42'
     backendAzureRmKey: 'DevOps001-main.tf'
+
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'S2-SPN-DevOps001'
+
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'S2-SPN-DevOps001'
